@@ -1,0 +1,3 @@
+name = Dumb Auth
+description = Does really stupid authentication.
+core = 7.x

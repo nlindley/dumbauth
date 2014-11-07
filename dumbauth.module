@@ -1,0 +1,22 @@
+<?php
+
+function dumbauth_menu() {
+  $items['dumbauth'] = array(
+    'access callback' => 'has_token',
+    'page callback' => 'do_dumbauth',
+    'delivery callback' => 'drupal_json_output'
+  );
+  return $items;
+}
+
+function has_token() {
+  return $_SERVER['HTTP_X_DUMBAUTH_TOKEN'] === '8949f4a2-02ed-4f2a-becd-4b964affcd20';
+}
+
+function do_dumbauth() {
+  if($uid = user_authenticate($_POST['username'], $_POST['password'])) {
+    return user_load($uid);
+  }
+
+  return false;
+}
