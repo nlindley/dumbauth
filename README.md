@@ -10,4 +10,4 @@ POST to `/dumbauth` with a payload containing the username and password. You mus
 curl --data 'username=myawesomeuser&password=supersecretpassword' --header 'X-DumbAuth-Token: b26f935e-bb38-484d-873b-67ae984dfdf8' http://example.com/dumbauth
 ```
 
-This will return false if the user is not found or authenticated, and a JSON representation of the user if authentication succeeds.
+This will return `false` if the user is not found or authenticated, and a JSON representation of the user if authentication succeeds.
