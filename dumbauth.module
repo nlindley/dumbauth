@@ -4,13 +4,23 @@ function dumbauth_menu() {
   $items['dumbauth'] = array(
     'access callback' => 'has_token',
     'page callback' => 'do_dumbauth',
-    'delivery callback' => 'drupal_json_output'
+    'delivery callback' => 'drupal_json_output',
   );
+
+  $items['admin/config/system/dumbauth'] = array(
+    'title' => 'Dumb Auth',
+    'description' => 'Settings for the Dumb Auth module',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dumbauth_admin'),
+    'access arguments' => array('administer dumbauth settings'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
   return $items;
 }
 
 function has_token() {
-  return $_SERVER['HTTP_X_DUMBAUTH_TOKEN'] === '8949f4a2-02ed-4f2a-becd-4b964affcd20';
+  return $_SERVER['HTTP_X_DUMBAUTH_TOKEN'] === variable_get('dumbauth_token');
 }
 
 function do_dumbauth() {
@@ -18,5 +28,20 @@ function do_dumbauth() {
     return user_load($uid);
   }
 
-  return false;
+  return FALSE;
+}
+
+function dumbauth_admin() {
+  $form = array();
+
+  $form['dumbauth_token'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Authentication token'),
+    '#default_value' => variable_get('dumbauth_token'),
+    '#size' => 36,
+    '#description' => t('A unique string that must be sent in the X-DumbAuth-Token header'),
+    '#required' => TRUE,
+  );
+
+  return system_settings_form($form);
 }
