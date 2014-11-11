@@ -20,7 +20,7 @@ function dumbauth_menu() {
 }
 
 function has_token() {
-  return $_SERVER['HTTP_X_DUMBAUTH_TOKEN'] === variable_get('dumbauth_token');
+  return isset($_SERVER['HTTP_X_DUMBAUTH_TOKEN']) && $_SERVER['HTTP_X_DUMBAUTH_TOKEN'] === variable_get('dumbauth_token');
 }
 
 function do_dumbauth() {
