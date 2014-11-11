@@ -7,7 +7,7 @@ function dumbauth_menu() {
     'delivery callback' => 'drupal_json_output',
   );
 
-  $items['admin/config/system/dumbauth'] = array(
+  $items['admin/config/services/dumbauth'] = array(
     'title' => 'Dumb Auth',
     'description' => 'Settings for the Dumb Auth module',
     'page callback' => 'drupal_get_form',
